@@ -10,16 +10,22 @@ const Auth = () => {
   const userData = useSelector((state) => state.authentication.user);
   console.log("userData", userData);
 
-  const dispatch = useDispatch();
-
-  // const handleLogin = () => {
-  //       username: username,
-  //       password: password
-  // };
+  const [isBackButtonClicked, setIsBackButtonClicked] = useState(false);
 
   return (
     <div>
-      {!userData ? <Registration /> : <ActionAreaCard userData={userData} />}
+      {!isBackButtonClicked ? (
+        <Registration />
+      ) : (
+        <ActionAreaCard
+          isBackButtonClicked={isBackButtonClicked}
+          setIsBackButtonClicked={setIsBackButtonClicked}
+          userData={userData}
+        />
+      )}
+      {isBackButtonClicked && (
+        <button onClick={() => setIsBackButtonClicked(false)}>Go Back</button>
+      )}
     </div>
   );
 };

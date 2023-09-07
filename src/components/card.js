@@ -5,16 +5,23 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "../App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../store/authSlice";
 
-export default function ActionAreaCard({ userData }) {
+export default function ActionAreaCard({
+  userData,
+  setIsBackButtonClicked,
+  isBackButtonClicked,
+}) {
   const dispatch = useDispatch();
 
-  const onLogout = () => {
-    dispatch(logout());
+  const handleBackButtonClick = () => {
+    setIsBackButtonClicked(true);
   };
+  // const onLogout = () => {
+  //   dispatch(logout());
+  // };
 
   return (
     <Card className="main-card" sx={{ maxWidth: 345 }}>
@@ -32,7 +39,8 @@ export default function ActionAreaCard({ userData }) {
           <Typography variant="body2" color="text.secondary">
             <b>username:</b> {userData.username} <br />
             <b>Email:</b> {userData.email} <br />
-            <LogoutIcon className="icon" onClick={onLogout} />
+            {/* <LogoutIcon className="icon" onClick={onLogout} /> */}
+            <ArrowBackIcon className="icon" onClick={handleBackButtonClick} />
           </Typography>
         </CardContent>
       </CardActionArea>
